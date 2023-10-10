@@ -26,8 +26,8 @@ type Config struct {
 
 func InitDB() {
 	config := Config{
-		DB_Username: "alif",
-		DB_Password: "mysqlaccessforalif4231",
+		DB_Username: "root",
+		DB_Password: "",
 		DB_Port:     "3306",
 		DB_Host:     "localhost",
 		DB_Name:     "crud_go_quiz_6",
