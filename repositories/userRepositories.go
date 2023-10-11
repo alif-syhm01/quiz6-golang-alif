@@ -3,8 +3,6 @@ package repositories
 import (
 	"echo-golang-quiz6/configs"
 	"echo-golang-quiz6/models"
-
-	"github.com/labstack/echo/v4"
 )
 
 func GetUsers(usersList *[]models.User) error {
@@ -46,13 +44,7 @@ func CreateUser(userRequest *models.User) error {
 	return nil
 }
 
-func UpdateUser(c echo.Context, userUpdate *models.User, id string) error {
-	// get data based on id
-	configs.DB.First(&userUpdate, id)
-
-	// binding the user input
-	c.Bind(&userUpdate)
-
+func UpdateUser(userUpdate *models.User, id string) error {
 	// query to save data to table
 	result := configs.DB.Save(&userUpdate)
 

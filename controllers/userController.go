@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"echo-golang-quiz6/configs"
 	"echo-golang-quiz6/models"
 	"echo-golang-quiz6/repositories"
 	"net/http"
@@ -97,8 +98,14 @@ func UpdateUserController(c echo.Context) error {
 	// make a variable for containing data from struct User
 	var user = models.User{}
 
+	// get data based on id
+	configs.DB.First(&user, id)
+
+	// binding the user input
+	c.Bind(&user)
+
 	// call repositories to update data
-	err := repositories.UpdateUser(c, &user, id)
+	err := repositories.UpdateUser(&user, id)
 
 	// check the error
 	if err != nil {
@@ -113,6 +120,7 @@ func UpdateUserController(c echo.Context) error {
 	return c.JSON(http.StatusOK, models.BaseResponse{
 		Message: "Berhasil merubah data",
 		Status:  true,
+		Data:    user,
 	})
 }
 
@@ -141,5 +149,6 @@ func DeleteUserController(c echo.Context) error {
 	return c.JSON(http.StatusOK, models.BaseResponse{
 		Message: "Berhasil menghapus data",
 		Status:  true,
+		Data:    nil,
 	})
 }
